@@ -6,12 +6,13 @@ const onerror = require('koa-onerror')
 const bodyparser = require('koa-bodyparser')
 const logger = require('koa-logger')
 const helmet = require('koa-helmet')
+const jwt = require('./middlewares/jwt')
 
 const index = require('./routes/index')
 
 // 安装预防，设置必要的 http 头
 app.use(helmet())
-
+app.use(jwt)
 // error handler
 onerror(app)
 
