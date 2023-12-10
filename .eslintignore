@@ -1,7 +1,2 @@
-# eslint检验排除的文件
-public
-build/*.js
-src/assets
-dist
-
-**/Cesium.js
+node_modules/
+wfp_test/

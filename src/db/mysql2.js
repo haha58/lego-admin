@@ -11,7 +11,7 @@ async function testMysqlConn() {
 }
 
 // 可直接执行 node src/db/mysql2.js 进行测试
-; (async () => {
+ (async () => {
   const rows = await testMysqlConn()
   console.log('🚀🚀 ~ rows', rows);
 })()
