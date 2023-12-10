@@ -1,5 +1,5 @@
 const redis = require('redis')
-const { redisConfig } = require('../config/envs/dev')
+const { redisConfig } = require('../config/dev')
 
 // 创建客户端
 const { port, host, password } = redisConfig

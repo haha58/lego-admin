@@ -1,5 +1,5 @@
 const Sequelize = require("sequelize")
-const { mysqlConfig } = require('../../config/envs/dev')
+const { mysqlConfig } = require('../../config/dev')
 const { isPrd, isTest } = require('../../utils/env')
 
 // 连接配置
