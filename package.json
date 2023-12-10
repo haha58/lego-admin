@@ -5,13 +5,15 @@
     "main": "index.js",
     "scripts": {
         "start": "cross-env NODE_ENV=dev node bin/www",
-        "test": "echo \"Error: no test specified\" && exit 1",
+        "test:local": "cross-env NODE_ENV=test_local jest --runInBand  --passWithNoTests --colors --forceExit",
+        "test:remote": "cross-env NODE_ENV=test_remote jest --runInBand  --passWithNoTests --colors --forceExit",
         "lint": "eslint \"src/**/*.{js,ts}\"",
         "lint-fix": "eslint --fix \"src/**/*.{js,ts}\""
     },
     "author": "",
     "license": "ISC",
     "dependencies": {
+        "axios": "^1.6.2",
         "jsonwebtoken": "^9.0.2",
         "koa": "^2.14.2",
         "koa-bodyparser": "^4.4.1",
@@ -26,10 +28,12 @@
         "redis": "^3.0.2",
         "require-all": "^3.0.0",
         "sequelize": "^6.35.1",
-        "simple-git": "^3.21.0"
+        "simple-git": "^3.21.0",
+        "supertest": "^6.3.3"
     },
     "devDependencies": {
-        "eslint": "^8.55.0"
+        "eslint": "^8.55.0",
+        "jest": "^29.7.0"
     },
     "repository": {
         "type": "git",

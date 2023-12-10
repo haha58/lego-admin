@@ -8,4 +8,6 @@ module.exports = {
     isPrdDev: ENV === 'prd_dev',
     isDev: ENV === 'dev',
     isTest: ENV === 'test',
+    isTestRemote:ENV === 'test_remote',
+    isTestLocal:ENV === 'test_local'
 }
