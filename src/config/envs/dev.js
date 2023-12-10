@@ -14,4 +14,9 @@ module.exports = {
     port: '27017',
     database: 'lego-template-detail',
   },
+  redisConfig: {
+    port: '6379',
+    host: '127.0.0.1',
+    password: '123456'
+  },
 }
