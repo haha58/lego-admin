@@ -7,6 +7,8 @@ const bodyparser = require('koa-bodyparser')
 const logger = require('koa-logger')
 const helmet = require('koa-helmet')
 
+const index = require('./routes/index')
+
 // 安装预防，设置必要的 http 头
 app.use(helmet())
 
@@ -21,7 +23,7 @@ app.use(
 )
 app.use(json())
 app.use(logger())
-
+app.use(index.routes(), index.allowedMethods())
 
 // logger
 app.use(async (ctx, next) => {
