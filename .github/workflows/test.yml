@@ -1,22 +1,55 @@
 # This workflow will run tests using node and then publish a package to GitHub Packages when a release is created
 # For more information see: https://docs.github.com/en/actions/publishing-packages/publishing-nodejs-packages
 
-name: Node.js Package
+name: test
 
-on:
- workflow_dispatch: # Putting here is also fine!!
+on:  # 触发条件
+  # release:
+  #   types: [created]
   push: # 在下面的分支进行 push 操作的时候触发
-        branches: # 触发的分支 可以设置多个
-            - main # 分支名称
-        paths: # 以下目录中的文件有改动就触发  可以不写 代表所有文件
-            - '.github/workflows/**'
-            - '__test__/**'
-            - 'src/**'
+    branches: # 触发的分支 可以设置多个
+      - master # 分支名称
+    paths: # 以下目录中的文件有改动就触发  可以不写 代表所有文件
+      - '.github/workflows/**'
+      - '__test__/**'
+      - 'src/**'
 
-jobs:
-   test2: # 任务名称 可以自定义 也可以使用第三方
-        runs-on: ubuntu-latest # 指定运行环境 操作系统 没有特殊情况不需要改
-        steps: # 步骤
-            - run: touch a.txt # 自定义执行命令  单行的方式
-            - run: echo 100 > a.txt # a.text 写入内容
-            - run: cat a.txt # 读取  a.text 内容
+
+jobs:    # 任务
+  build:    # 任务名称 可以自定义 也可以使用第三方
+    runs-on: ubuntu-latest   # 指定运行环境 操作系统 没有特殊情况不需要改
+    steps:   # 步骤
+      - uses: actions/checkout@v3    # 第一个步骤   第三方的actions   等同于执行了 git pull
+      - name: Use Node.js    # 第二个步骤 步骤名称 自定义
+      - uses: actions/setup-node@v3    #  第三方的actions   安装 node.js
+        with:   # 参数
+          node-version: 16    # nodejs 的版本
+      - name: lint and test # 第三个步骤 步骤名称 自定义 
+      - run: | # 自定义执行命令  多行的方式
+          npm i
+          npm run lint-fix
+          npm run test:local
+
+  test2: # 任务名称 可以自定义 也可以使用第三方
+    runs-on: ubuntu-latest # 指定运行环境 操作系统 没有特殊情况不需要改
+    steps: # 步骤
+        - run: touch a.txt # 自定义执行命令  单行的方式
+        - run: echo 100 > a.txt # a.text 写入内容
+        - run: cat a.txt # 读取  a.text 内容
+
+  # publish-gpr:
+  #   needs: build
+  #   runs-on: ubuntu-latest
+  #   permissions:
+  #     contents: read
+  #     packages: write
+  #   steps:
+  #     - uses: actions/checkout@v3
+  #     - uses: actions/setup-node@v3
+  #       with:
+  #         node-version: 16
+  #         registry-url: https://npm.pkg.github.com/
+  #     - run: npm ci
+  #     - run: npm publish
+  #       env:
+  #         NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
