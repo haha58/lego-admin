@@ -23,5 +23,8 @@ module.exports = {
         "ecmaVersion": "latest"
     },
     "rules": {
+        'no-unused-vars': 0,
+        'no-console': 'off',
+        'max-classes-per-file': 0,
     }
 }
