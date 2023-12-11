@@ -4,8 +4,13 @@
 name: Node.js Package
 
 on:
-  release:
-    types: [created]
+  push: # 在下面的分支进行 push 操作的时候触发
+        branches: # 触发的分支 可以设置多个
+            - main # 分支名称
+        paths: # 以下目录中的文件有改动就触发  可以不写 代表所有文件
+            - '.github/workflows/**'
+            - '__test__/**'
+            - 'src/**'
 
 jobs:
    test2: # 任务名称 可以自定义 也可以使用第三方
