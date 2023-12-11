@@ -25,10 +25,9 @@ jobs:    # 任务
         with:   # 参数
           node-version: 16    # nodejs 的版本
       - name: lint and test # 第三个步骤 步骤名称 自定义 
-      - run: | # 自定义执行命令  多行的方式
-          npm i
-          npm run lint-fix
-          npm run test:local
+      - run: npm i
+      - run: npm run lint-fix
+      - run: npm run test:local
 
   test2: # 任务名称 可以自定义 也可以使用第三方
     runs-on: ubuntu-latest # 指定运行环境 操作系统 没有特殊情况不需要改
