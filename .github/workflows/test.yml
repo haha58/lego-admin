@@ -23,7 +23,7 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16
-      - run: npm ci
+      - run: npm i
       - run: npm run lint-fix
       - run: npm run test:local
   test2: # 任务名称 可以自定义 也可以使用第三方
