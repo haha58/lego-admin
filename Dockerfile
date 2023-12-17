@@ -9,12 +9,11 @@ COPY  . /app
 RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && echo 'Asia/Shanghai' > /etc/timezone
 RUN npm set registry  https://registry.npmmirror.com
 RUN npm install
-RUN npm i pm2 -g
 
 # 启动容器时, 只能有一个 CMD
 # npx pm2 log  cmd 最后的命令是一个阻塞控制台的程序
-CMD echo $SERVER_NAME && echo $SERVER_NAME && npm run start
+CMD echo $SERVER_NAME && echo $SERVER_NAME && npm run pm-dev && npx pm2 log
 
 # 环境变量
-ENV SERVER_NAME='lego-editor-server'
+ENV SERVER_NAME='lego-editor-server-docker'
 ENV AUTHOR_NAME='mwy'

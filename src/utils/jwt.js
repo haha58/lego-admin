@@ -1,7 +1,7 @@
 const util = require('util')
 const jwt = require('jsonwebtoken')
 const { JWT_SECRET } = require('../config/constant')
-const { jwtExpiresIn } = require('../config/dev')
+const { jwtExpiresIn } = require('../config/index')
 
 const verify = util.promisify(jwt.verify)
 

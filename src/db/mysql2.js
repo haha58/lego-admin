@@ -1,7 +1,7 @@
 // src\db\mysql2.js
 
 const mysql = require('mysql2/promise')
-const { mysqlConfig } = require('../config/dev')
+const { mysqlConfig } = require('../config/index')
 
 // mysql2 连接测试
 async function testMysqlConn() {

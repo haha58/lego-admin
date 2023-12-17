@@ -9,7 +9,7 @@
         "test:remote": "cross-env NODE_ENV=test_remote jest --runInBand  --passWithNoTests --colors --forceExit",
         "lint": "eslint \"src/**/*.{js,ts}\"",
         "lint-fix": "eslint --fix \"src/**/*.{js,ts}\"",
-        "pm-dev": "cross-env NODE_ENV=dev pm2 start bin/pm2/pm2-dev.config.js",
+        "pm-dev": "cross-env NODE_ENV=prd_dev pm2 start bin/pm2/pm2-dev.config.js",
         "prepare": "husky install"
     },
     "lint-staged": {

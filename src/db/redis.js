@@ -1,5 +1,5 @@
 const redis = require('redis')
-const { redisConfig } = require('../config/dev')
+const { redisConfig } = require('../config/index')
 
 // 创建客户端
 const { port, host, password } = redisConfig
@@ -7,7 +7,7 @@ const opt = {}
 if (password) {
   opt.password = password // prd 环境需要密码
 }
-const redisClient = redis.createClient(port, host, opt)
+const redisClient = redis.createClient(port, host, {auth:opt})
 redisClient.on('error', err => {
   console.error('redis connect error', err)
 })
