@@ -3,7 +3,7 @@ const router = require('koa-router')()
 const packageInfo = require('../../package.json')
 // const testMysqlConn = require('../db/mysql2')
 const ENV = require('../utils/env')
-// const { WorkModel } = require('../models/WorksModel')
+// const  WorkModel  = require('../models/WorksModel')
 const { cacheGet, cacheSet } = require('../utils/cache/index')
 
 // 测试数据库连接
