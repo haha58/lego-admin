@@ -3,14 +3,20 @@ const { redisConfig } = require('../config/index')
 
 // 创建客户端
 const { port, host, password } = redisConfig
-const opt = {}
-if (password) {
-  opt.password = password // prd 环境需要密码
-}
-const redisClient = redis.createClient(port, host, {auth:opt})
+
+
+const redisClient = redis.createClient(port, host)
 redisClient.on('error', err => {
   console.error('redis connect error', err)
 })
+redisClient.auth(password, function(error) {
+  if (error) {
+    console.error('Redis Authentication Failed:', error);
+  } else {
+    console.log('Redis Authenticated');
+  }
+});
+
 // 运行 node src/db/redis.js 进行测试连接
 redisClient.on('connect', () => {
   console.log('redis connect success')
