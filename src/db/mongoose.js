@@ -23,7 +23,7 @@ db.on('error', err => {
 
 // 用以测试数据库连接是否成功
 db.once('open', () => {
-   console.log('mongoose connect success')
+  console.log('🚀🚀 mongoose connect success');
 })
 
 module.exports = mongoose

@@ -17,6 +17,12 @@ services:
         # 端口映射 宿主机通过 8081 访问
         ports:
             - 8081:3000
+        depends_on:
+            - editor-mysql
+            - editor-redis
+            - editor-mongo
+        networks:
+            - back-tier
     # service name
     editor-redis:
         # 引用官方 redis 镜像
@@ -33,4 +39,62 @@ services:
         environment:
             # 设置时区
             - TZ=Asia/Shanghai
+        networks:
+            - back-tier
     # service name
+    editor-mysql:
+        # 引用官网 mysql 镜像
+        image: mysql
+        container_name: editor-mysql
+        # 出错重启
+        restart: always
+        # 高权限，执行下面的 mysql/init
+        privileged: true
+        # 解决无法远程访问的问题
+        command: --default-authentication-plugin=mysql_native_password
+        ports:
+            # 宿主机可以用 127.0.0.1:3305 即可连接容器中的数据库
+            - 3305:3306
+        volumes:
+            # 记录日志
+            - .docker-volumes/mysql/log:/var/log/mysql
+            # 数据持久化
+            - .docker-volumes/mysql/data:/var/lib/mysql
+            # 初始化 sql
+            - ./mysql/init:/docker-entrypoint-initdb.d/
+        environment:
+            # 初始化容器时创建数据库
+            - MYSQL_USER=test #创建 test 用户
+            - MYSQL_PASSWORD=123456 #设置 test 用户的密码
+            - MYSQL_DATABASE=lego-template
+            - MYSQL_ROOT_PASSWORD=123456
+            # 设置时区
+            - TZ=Asia/Shanghai
+        networks:
+            - back-tier
+    editor-mongo:
+        # 引用官网 mongo 镜像
+        image: mongo
+        # 容器名称
+        container_name: editor-mongo
+        # 出错重启
+        restart: always
+        # 文件映射
+        volumes:
+            # 数据持久化
+            - '.docker-volumes/mongo/data:/data/db'
+            # - ./mongo/mongo-init.sh:/docker-entrypoint-initdb.d/mongo-init.sh
+        environment:
+            - MONGO_INITDB_ROOT_USERNAME=admin
+            - MONGO_INITDB_ROOT_PASSWORD=123456
+            - MONGO_INITDB_DATABASE=lego-template-detail
+            # 设置时区
+            - TZ=Asia/Shanghai
+        ports:
+            # 宿主机可以用 127.0.0.1:27016 即可连接容器中的数据库
+            - '27016:27017'
+        networks:
+            - back-tier
+networks:
+  back-tier:
+    driver: bridge
