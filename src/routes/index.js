@@ -15,7 +15,8 @@ router.get('/api/db-check', async (ctx) => {
   let mongodbConn
   try {
     mongodbConn = true
-    await WorkModel.findOne()
+    let res= await WorkModel.findOne()
+    console.log("🚀🚀 ~ rows",res)
   } catch (error) {
     console.log("mongodbConn error",error)
     mongodbConn = false
