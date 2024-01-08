@@ -17,25 +17,26 @@ jobs:
     deploy-dev:
         runs-on: ubuntu-latest
 
-        steps:
+        steps:   
             - uses: actions/checkout@v2   #获取最新代码
-            - name: set ssh key # 临时设置 ssh key
+            - name: set ssh key # 临时设置 ssh key   把私钥放到ubuntu上面
               run: |
                   mkdir -p ~/.ssh/
-                  echo "${{secrets.WFP_ID_RSA}}" > ~/.ssh/id_rsa
-                  chmod 600 ~/.ssh/id_rsa
-                  ssh-keyscan "111.229.71.210" >> ~/.ssh/known_hosts
+                  echo "${{secrets.WFP_ID_RSA}}" > ~/.ssh/id_rsa   #私钥内容放到id_rsa
+                  chmod 600 ~/.ssh/id_rsa   #加权限
+                  ssh-keyscan "111.229.71.210" >> ~/.ssh/known_hosts 
             - name: deploy # 部署
               run: |
                   ssh root@111.229.71.210"
                     cd /home/work/imooc-lego/editer-server;
-                    git remote add origin https://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@github.com:haha58/lego-admin.git;
+                    # git remote add origin https://haha58:${{secrets.WFP_PASSWORD}}@github.com:haha58/lego-admin.git -b dev;  #如果是私人仓库
+                    git remote add origin https://github.com/haha58/lego-admin.git -b dev
                     git checkout dev;
                     git pull origin dev; # 重新下载最新代码
                     git remote remove origin; # 删除 origin ，否则会暴露 github 密码
                     # 启动 docker
                     docker compose build editor-server; # 和 docker-compose.yml service 名字一致
-                    docker compose up -d;
+                    docker compose up;
                   "
             - name: delete ssh key # 删除 ssh key
               run: rm -rf ~/.ssh/id_rsa
