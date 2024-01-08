@@ -1,0 +1,42 @@
+# dev 分支 自动部署到测试机
+name: deploy for dev
+
+on:
+    push:
+        branches:
+            - 'master' # 只针对 main 分支
+        paths:
+            - '.github/workflows/*'
+            # - '__test__/**' # dev 不需要立即测试
+            - 'src/**'
+            - 'Dockerfile'
+            - 'docker-compose.yml'
+            - 'bin/*'
+
+jobs:
+    deploy-dev:
+        runs-on: ubuntu-latest
+
+        steps:
+            - uses: actions/checkout@v2   #获取最新代码
+            - name: set ssh key # 临时设置 ssh key
+              run: |
+                  mkdir -p ~/.ssh/
+                  echo "${{secrets.WFP_ID_RSA}}" > ~/.ssh/id_rsa
+                  chmod 600 ~/.ssh/id_rsa
+                  ssh-keyscan "111.229.71.210" >> ~/.ssh/known_hosts
+            - name: deploy # 部署
+              run: |
+                  ssh root@111.229.71.210"
+                    cd /home/work/imooc-lego/editer-server;
+                    git remote add origin https://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@github.com:haha58/lego-admin.git;
+                    git checkout dev;
+                    git pull origin dev; # 重新下载最新代码
+                    git remote remove origin; # 删除 origin ，否则会暴露 github 密码
+                    # 启动 docker
+                    docker compose build editor-server; # 和 docker-compose.yml service 名字一致
+                    docker compose up -d;
+                  "
+            - name: delete ssh key # 删除 ssh key
+              run: rm -rf ~/.ssh/id_rsa
+
