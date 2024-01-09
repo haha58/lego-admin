@@ -22,7 +22,7 @@ jobs:
             - name: set ssh key # 临时设置 ssh key   把私钥放到ubuntu上面
               run: |
                   mkdir -p ~/.ssh/
-                  echo "${{secrets.WFP_ID_RSA}}" > ~/.ssh/id_rsa  #私钥内容放到id_rsa
+                  echo "${{secrets.WFP_ID_RSA}}" > ~/.ssh/authorized_keys  #私钥内容放到id_rsa
                   chmod 600 ~/.ssh/id_rsa
                   ssh-keyscan "111.229.71.210" >> ~/.ssh/known_hosts
             - name: deploy # 部署test
