@@ -18,14 +18,14 @@ jobs:
         runs-on: ubuntu-latest
 
         steps:
-            - uses: actions/checkout@v2   #获取最新代码
+            - uses: actions/checkout@v2 #获取最新代码
             - name: set ssh key # 临时设置 ssh key   把私钥放到ubuntu上面
               run: |
                   mkdir -p ~/.ssh/
                   echo "${{secrets.WFP_ID_RSA}}" > ~/.ssh/id_rsa  #私钥内容放到id_rsa
                   chmod 600 ~/.ssh/id_rsa
                   ssh-keyscan "111.229.71.210" >> ~/.ssh/known_hosts
-            - name: deploy # 部署
+            - name: deploy # 部署test
               run: |
                   ssh root@111.229.71.210 "
                     cd /home/work/imooc-lego/biz-editer-server;
@@ -39,4 +39,3 @@ jobs:
                   "
             - name: delete ssh key # 删除 ssh key
               run: rm -rf ~/.ssh/id_rsa
-
