@@ -19,31 +19,23 @@ jobs:
 
         steps:
             - uses: actions/checkout@v2 #获取最新代码
-            - name: set ssh key 
-              uses: garygrossgarten/github-action-ssh@release
-              with:
-                command: ls -a
-                username: root
-                port: 111.229.71.210
-                privateKey: ${{ secrets.WFP_ID_RSA}}
-
-            # - name: set ssh key # 临时设置 ssh key   把私钥放到ubuntu上面
-            #   run: |
-            #       mkdir -p ~/.ssh/
-            #       echo "${{secrets.WFP_ID_RSA}}" > ~/.ssh/authorized_keys  #私钥内容放到id_rsa
-            #       chmod 600 ~/.ssh/authorized_keys
-            #       ssh-keyscan "111.229.71.210" >> ~/.ssh/known_hosts
-            # - name: deploy # 部署test
-            #   run: |
-            #       ssh root@111.229.71.210 "
-            #         cd /home/work/imooc-lego/biz-editer-server;
-            #         git remote add origin https://${{secrets.WFP_TOKEN}}@github.com:haha58/lego-admin.git;
-            #         git checkout dev;
-            #         git pull origin dev; # 重新下载最新代码
-            #         git remote remove origin; # 删除 origin ，否则会暴露 github 密码
-            #         # 启动 docker
-            #         docker compose build editor-server; # 和 docker-compose.yml service 名字一致
-            #         docker compose up -d;
-            #       "
-            # - name: delete ssh key # 删除 ssh key
-            #   run: rm -rf ~/.ssh/id_rsa
+            - name: set ssh key # 临时设置 ssh key   把私钥放到ubuntu上面
+              run: |
+                  mkdir -p ~/.ssh/
+                  echo "${{secrets.WFP_ID_RSA}}" > ~/.ssh/authorized_keys  #私钥内容放到id_rsa
+                  chmod 600 ~/.ssh/authorized_keys
+                  ssh-keyscan "111.229.71.210" >> ~/.ssh/known_hosts
+            - name: deploy # 部署test
+              run: |
+                  ssh root@111.229.71.210 "
+                    cd /home/work/imooc-lego/biz-editer-server;
+                    git remote add origin https://${{secrets.WFP_TOKEN}}@github.com:haha58/lego-admin.git;
+                    git checkout dev;
+                    git pull origin dev; # 重新下载最新代码
+                    git remote remove origin; # 删除 origin ，否则会暴露 github 密码
+                    # 启动 docker
+                    docker compose build editor-server; # 和 docker-compose.yml service 名字一致
+                    docker compose up -d;
+                  "
+            - name: delete ssh key # 删除 ssh key
+              run: rm -rf ~/.ssh/id_rsa
