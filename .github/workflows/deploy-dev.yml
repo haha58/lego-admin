@@ -27,7 +27,7 @@ jobs:
               #     ssh-keyscan "111.229.71.210" >> ~/.ssh/known_hosts
             - name: deploy # 部署test
               run: |
-                  ssh root@111.229.71.210 
+                  ssh root@111.229.71.210 -i ${{secrets.WFP_ID_RSA}} -t
                   cd /home/work/imooc-lego/biz-editer-server;
                   git remote add origin https://${{secrets.WFP_TOKEN}}@github.com:haha58/lego-admin.git;
                   git checkout dev;
