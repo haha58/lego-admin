@@ -28,7 +28,8 @@ jobs:
                   cat "${{secrets.WFP_ID_RSA}}"
             - name: deploy # 部署test
               run: |
-                  ssh root@111.229.71.210 -i ${{secrets.WFP_ID_RSA}} "
+                  ssh root@111.229.71.210 -i 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDXEJfuMYU0fWdwlHs+Sagtq2keVF8W18aoeuN601pcNCk9A5opCIYEWyaQyj/J/OE+hQ4g6vyr6ZEdxo4+ALYcyE9OKIirFrWGH5BSwZZNpHgJN8SBOlCdrWXX2+tNwLos8m8Gd0fEUt7SxEazx866MUjIG4wnuJXk0yjuiNHyDYbiTI4OoG4celmvBMt/3rdmbs06m+0/I8RuodY0LCp3hXXm00MAMxS4M1rASKvov9T2jublkixdxGljxxWP2kfrGpghoXbV2zNgRdnXxcruaZqatjRUhbMHeDpwIQ24qvelUtM4yO1Tbk4CF2OpWSdTELq9o10CjOcFvFEbU4malrGPNnO6vH7Ek2PD02quUPYHvH5qvLVkTCMx0H+r8BFTBlLxzQAsMMRqbOr9yCzFYGuyEw0qA2ij86ZwA2b7MScm8w3YdPySdVWQ/+Q0hiAf9ehYtU5ANAP3r4X90ca+6hktaGe6qAj2HCKuqZ1QALfS9N0kUCDwjsqcwfGC0D8= 1461089222@qq.com
+                  ' "
                     cd /home/work/imooc-lego/editor-server;
                     git remote add origin https://${{secrets.WFP_TOKEN}}@github.com:haha58/lego-admin.git;
                     git checkout dev;
