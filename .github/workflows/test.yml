@@ -31,7 +31,7 @@ jobs: # 任务
         steps: # 步骤
           - uses: easingthemes/ssh-deploy@main
             with:
-              SSH_PRIVATE_KEY: ${{ secrets.ID_RSA }}
+              SSH_PRIVATE_KEY: ${{ secrets.WFP_ID_RSA }}
               # ARGS: -rltgoDzvO --delete
               SOURCE: ./
               REMOTE_HOST: '111.229.71.210'
