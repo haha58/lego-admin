@@ -27,7 +27,43 @@ jobs:
                   ssh-keyscan "111.229.71.210" >> ~/.ssh/known_hosts
             - name: deploy # 部署test
               run: |
-                  ssh root@111.229.71.210 -i ${{secrets.WFP_ID_RSA}}"
+                  ssh root@111.229.71.210 -i "b3BlbnNzaC1rZXktdjEAAAAABG5vbmUAAAAEbm9uZQAAAAAAAAABAAABlwAAAAdzc2gtcn
+                  NhAAAAAwEAAQAAAYEA1xCX7jGFNH1ncJR7PkmoLatpHlRfFtfGqHrjetNaXDQpPQOaKQiG
+                  BFsmkMo/yfzhPoUOIOr8q+mRHcaOPgC2HMhPTiiIqxa1hh+QUsGWTaR4CTfEgTpQna1l19
+                  vrTcC6LPJvBndHxFLe0sRGs8fOujFIyBuMJ7iV5NMo7ojR8g2G4kyODqBuHHpZrwTLf963
+                  Zm7NOpvtPyPEbqHWNCwqd4V15tNDADMUuDNawEir6L/U9o7m5ZIsXcRpY8cVj9pH6xqYIa
+                  F21dszYEXZ18XK7mmamrY0VIWzB3g6cCENuKr3pVLTOMjtU25OAhdjqVknUxC6vaNdAozn
+                  BbxRG1OJmpaxjzZzurx+xJNjw9NqrlD2B7x+ary1ZEwjMdB/q/ARUwZS8c0ALDDEamzq/c
+                  gsxWBrshMNKgNoo/OmcANm+zEnJvMN2HT8knVVkP/kNIYgH/XoWLVOQDQD96+F/dHGvuoZ
+                  LWhnuqgI9hwirqmdUAC30vTdJFAg8I7KnMHxgtA/AAAFiN//gQTf/4EEAAAAB3NzaC1yc2
+                  EAAAGBANcQl+4xhTR9Z3CUez5JqC2raR5UXxbXxqh643rTWlw0KT0DmikIhgRbJpDKP8n8
+                  4T6FDiDq/KvpkR3Gjj4AthzIT04oiKsWtYYfkFLBlk2keAk3xIE6UJ2tZdfb603Auizybw
+                  Z3R8RS3tLERrPHzroxSMgbjCe4leTTKO6I0fINhuJMjg6gbhx6Wa8Ey3/et2ZuzTqb7T8j
+                  xG6h1jQsKneFdebTQwAzFLgzWsBIq+i/1PaO5uWSLF3EaWPHFY/aR+samCGhdtXbM2BF2d
+                  fFyu5pmpq2NFSFswd4OnAhDbiq96VS0zjI7VNuTgIXY6lZJ1MQur2jXQKM5wW8URtTiZqW
+                  sY82c7q8fsSTY8PTaq5Q9ge8fmq8tWRMIzHQf6vwEVMGUvHNACwwxGps6v3ILMVga7ITDS
+                  oDaKPzpnADZvsxJybzDdh0/JJ1VZD/5DSGIB/16Fi1TkA0A/evhf3Rxr7qGS1oZ7qoCPYc
+                  Iq6pnVAAt9L03SRQIPCOypzB8YLQPwAAAAMBAAEAAAGBALKXDvM3oBvkfz9XrbgdxlCWZO
+                  ZQvd3kNQ23bquSUxj6H7yQ/zVP5Ko9XxshODNtkUYvi3n+aPABNwZ42anXQWNJW8HVmxgn
+                  9Xl5QInYRA4Zo6xT6RQ+7q7hTQ8hipa4kmG8uEGwT6JSBsMTRnsIUzz+rCev6IUbnS21w+
+                  nBKEZOwVGurNCsnIN9fnf+DVcUBUxEepxO24ZxFy+fqJcOjf1OkIerq5nA0VXdH2FJd6gB
+                  lMFiDY9aAQmkjrfSnK8mXMi7jPeviz73oBv+G99PzfoYFex7ffSPOyJRwukaswf7GLxKZj
+                  1bj3moQ+Dd0sEECyVcn3cxLH2dtq4TGdZeFr4GGwDNEd8rWMs2bZ/P7O3irC5Qdgu7wx6p
+                  SdYPwk7NB+VR9LxziCUXwJcZoLrphYe+Xl5V1oOHg9/kIlhvU83SQdtHtNVskcOJVQleNz
+                  wOBO3ulmrl/n0c2fF17f/sjyCpLrawph8ABEvEyHuO2tVy15mYYFwsRvVypW9lu5tGwQAA
+                  AMEAhZrPsqZ/UQvncgr36PdIXNlDIs4ckdMuFp2xSZCY51SaM+ia5Di9o4CHjJw9S0jNrZ
+                  Yjrq20QraatLs2sFAn/vU0TYuRQcVhM7lzFbdYprYSlE/V+YzTBSd8z2w4hbo4Za01egUo
+                  2m6vIYNxa9dQsLcz7ecPUzNZOpvx+dy+q/jVO/MaBirO93kL/BpEQKFacQChZfc8xR83Wt
+                  IQNJ8VcStwFDa7eqxtK8Xr9587HJl7kzaidU+mS1LC52qpUaiXAAAAwQDuEqouVtElxJBc
+                  SLBz/0O4pIRp7hzh/C3scr//Ts/ly8RquIEplrMOmTU8/oNSsxC+AitNkVW3g0hukZM1f0
+                  l2Y/kwE+wXIhXq34wjMIz2EFM8C+gXHYYO1wqdz5QpLUUWRX9iebE517dQoQlasdI8RSFm
+                  LX4YkTnyOO7EtyFJ5TgrMqGOoqNJqjzbDGjqhWnqtgh5CD5DgHKBjfqKnZXEskCuY+hw9n
+                  0SQ0aNcBHCLussd7j6wq1jpj4hwF0FF3EAAADBAOdCZsCNU5KgxM+OrNv7hsvrrZStllnk
+                  ZJMvYCQx/FTq4aVeUGeajtc4s3WtNDmtjEdUU2p11GIHmGt8oQvKYsMdB6+U/kqIQwSzVv
+                  j10m5a1jcFrjZpN4HhP2EvBtHIEB+eErkWCntk40wUt/d3VC3jMw41LxAZvbBKN0kSKuSu
+                  vzFx51Rq9/CPcoZ2lo1UZBOlhDbiyOefDcurNsUIHC4aAa9PxqFMwLxM5X+eMvUyGpCkxv
+                  boEEKWXbacCQNqrwAAABExNDYxMDg5MjIyQHFxLmNvbQ=="
+                  "
                     cd /home/work/imooc-lego/editor-server;
                     git remote add origin https://${{secrets.WFP_TOKEN}}@github.com:haha58/lego-admin.git;
                     git checkout dev;
