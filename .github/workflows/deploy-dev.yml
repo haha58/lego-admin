@@ -25,6 +25,7 @@ jobs:
                   echo "${{secrets.WFP_ID_RSA}}" > ~/.ssh/authorized_keys  #私钥内容放到id_rsa
                   chmod 600 ~/.ssh/authorized_keys
                   ssh-keyscan "111.229.71.210" >> ~/.ssh/known_hosts
+                  ssh -v root@111.229.71.210
             - name: deploy # 部署test
               run: |
                   ssh root@111.229.71.210 "
