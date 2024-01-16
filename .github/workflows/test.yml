@@ -1,54 +1,53 @@
-# This workflow will run tests using node and then publish a package to GitHub Packages when a release is created
-# For more information see: https://docs.github.com/en/actions/publishing-packages/publishing-nodejs-packages
+# This is a basic workflow to help you get started with Actions
 
-name: Test
+name: Deploy My Server
 
-on: # 触发条件
-    # release:
-    #   types: [created]
-    push: # 在下面的分支进行 push 操作的时候触发
-        branches: # 触发的分支 可以设置多个
-            - master # 分支名称
-        paths: # 以下目录中的文件有改动就触发  可以不写 代表所有文件
-            - '.github/workflows/**'
-            - '__test__/**'
-            - 'src/**'
+on:
+  push:
+    branches: [ master ]
 
-jobs: # 任务
-    build: # 任务名称 可以自定义 也可以使用第三方
-        runs-on: ubuntu-latest # 指定运行环境 操作系统 没有特殊情况不需要改
-        steps: # 步骤
-            - uses: actions/checkout@v3 # 第一个步骤   第三方的actions   等同于执行了 git pull
-            - uses: actions/setup-node@v3 #  第三方的actions   安装 node.js
-              with: # 参数
-                  node-version: 16 # nodejs 的版本
-            - run: npm i
-            - run: npm run lint-fix
-            - run: npm run test:local
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
 
-    test2: # 任务名称 可以自定义 也可以使用第三方
-        runs-on: ubuntu-latest # 指定运行环境 操作系统 没有特殊情况不需要改
-        steps: # 步骤
-          - uses: sshpass
-          - name: test #
-            run: |
-                sshpass -p haha123456W ssh root@192.168.11.11
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+
+      - name: use Node.js
+        # 使用action库  actions/setup-node安装node
+        uses: actions/checkout@v2
+        with:
+          node-version: 16.x
+      # 安装依赖
+      - name: npm install
+        run: npm install
+      # 打包
+      - name: npm build
+        run: npm run build
+      # 部署到服务器
+      - name: deploy
+        uses: easingthemes/ssh-deploy@v2.1.1
+        env:
+          # 本地.ssh文件下的私钥id_rsa，存在secrets的PRIVATE_KEY中
+          SSH_PRIVATE_KEY: ${{ secrets.WFP_ID_RSA }}
+          # 复制操作的参数。"-avzr --delete"意味部署时清空服务器目标目录下的文件
+        #   ARGS: "-avzr --delete" 
+          # 源目录，相对于$GITHUB_WORKSPACE根目录的路径
+          SOURCE: "./"
+          # 服务器域名/IP
+          REMOTE_HOST: ${{ secrets.HOST }}
+          # 服务器默认用户名为root
+          REMOTE_USER: "root"
+          # 目标目录
+          TARGET: './'
+ 
 
 
-
-    # publish-gpr:
-    #   needs: build
-    #   runs-on: ubuntu-latest
-    #   permissions:
-    #     contents: read
-    #     packages: write
-    #   steps:
-    #     - uses: actions/checkout@v3
-    #     - uses: actions/setup-node@v3
-    #       with:
-    #         node-version: 16
-    #         registry-url: https://npm.pkg.github.com/
-    #     - run: npm ci
-    #     - run: npm publish
-    #       env:
-    #         NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
