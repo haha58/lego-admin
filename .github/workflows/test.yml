@@ -29,16 +29,10 @@ jobs: # 任务
     test2: # 任务名称 可以自定义 也可以使用第三方
         runs-on: ubuntu-latest # 指定运行环境 操作系统 没有特殊情况不需要改
         steps: # 步骤
-          - uses: easingthemes/ssh-deploy@main
-            with:
-              SSH_PRIVATE_KEY: ${{ secrets.ID_RSA }}
-              # ARGS: -rltgoDzvO --delete
-              SOURCE: ./
-              REMOTE_HOST: 111.229.71.210
-              REMOTE_USER: root
-              TARGET: /text
-              # EXCLUDE: 
-
+          - uses: sshpass
+          - name: test #
+            run: |
+                sshpass -p haha123456W ssh root@192.168.11.11
 
 
 
