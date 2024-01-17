@@ -19,15 +19,13 @@ jobs:
 
         steps:
             - uses: actions/checkout@v2 #获取最新代码
-            # - name: set ssh key # 临时设置 ssh key   把私钥放到ubuntu上面
-            #   run: |
-            #       mkdir -p ~/.ssh/
-            #       echo ${{secrets.ID_RSA}} > id_rsa #私钥内容放到id_rsa
-
-            #       ssh-keyscan "111.229.71.210" >> ~/.ssh/known_hosts
+            - name: set ssh key # 临时设置 ssh key   把私钥放到ubuntu上面
+              run: |
+                   echo "${{secrets.WFP_ID_RSA}}" > id_rsa
+                #  ssh-keyscan "111.229.71.210" >> ~/.ssh/known_hosts
             - name: deploy # 部署test
               run: |
-                  ssh -i ${{secrets.ID_RSA}} root@111.229.71.210  "
+                  ssh -i id_rsa root@111.229.71.210  "
                     cd /home/work/imooc-lego/editor-server;
                     git remote add origin https://${{secrets.WFP_TOKEN}}@github.com:haha58/lego-admin.git;
                     git checkout dev;
