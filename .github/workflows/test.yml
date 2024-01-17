@@ -48,8 +48,9 @@ jobs:
           REMOTE_USER: "root"
           # 目标目录
           TARGET: './'
-          run: |
-              ssh  root@111.229.71.210  "
+      - name: delete ssh key
+        run: |
+            ssh root@111.229.71.210  "
                 docker compose build editor-server; # 和 docker-compose.yml service 名字一致
                 docker compose up -d;
               "
