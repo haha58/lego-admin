@@ -21,7 +21,7 @@ jobs:
             - uses: actions/checkout@v2 #获取最新代码
             - name: set ssh key # 临时设置 ssh key   把私钥放到ubuntu上面
               run: |
-                   echo "${{secrets.WFP_ID_RSA}}" > id_rsa
+                   echo "${{secrets.ID_RSA}}" > id_rsa
                    ssh-keyscan "111.229.71.210" >> ~/.ssh/known_hosts
             - name: deploy # 部署test
               run: |
