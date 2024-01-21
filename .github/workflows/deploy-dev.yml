@@ -29,7 +29,7 @@ jobs:
               run: |
                   ssh -i ~/.ssh/id_rsa root@111.229.71.210  "
                     cd /root/home;
-                    git remote add origin https://${{secrets.WFP_TOKEN}}@github.com:haha58/lego-admin.git;
+                    git remote add origin https://${{secrets.WFP_TOKEN}}@github.com/haha58/lego-admin.git;
                     git checkout dev;
                     git pull origin dev; # 重新下载最新代码
                     git remote remove origin; # 删除 origin ，否则会暴露 github 密码
