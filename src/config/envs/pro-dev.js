@@ -8,7 +8,6 @@ Object.assign(devConfig.mysqlConfig,{
 })
 Object.assign(devConfig.mongodbConfig,{
   host: 'editor-mongo',
-  user: 'root',
 })
 
 module.exports=devConfig
