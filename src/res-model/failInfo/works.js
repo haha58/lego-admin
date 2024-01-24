@@ -1,6 +1,4 @@
-
 // errno: 1300x
-
 module.exports = {
   // 创建作品失败，数据库错误
   createWorksDbErrorFailInfo: {

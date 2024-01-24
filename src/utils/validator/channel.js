@@ -1,10 +1,4 @@
-const strRule = {
-    type: 'string',
-    maxLength: 255,
-}
-const numRule = {
-    type: 'number',
-}
+const {strRule,numRule } = require('./commonRule')
 
 module.exports = {
     type: 'object',

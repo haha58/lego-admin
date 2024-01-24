@@ -1,5 +1,4 @@
 // errno: 1200x
-
 module.exports = {
   // 登录校验失败
   loginCheckFailInfo: {

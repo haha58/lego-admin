@@ -1,19 +1,4 @@
-/**
- * @description 数据校验 作品
- * @author 双越
- */
-
-// 普通字符串的规则
-const strRule = {
-    type: 'string',
-    maxLength: 255,
-}
-const numRule = {
-    type: 'number',
-}
-const boolRule = {
-    type: 'boolean',
-}
+const {strRule } = require('./commonRule')
 
 // 创建作品 schema
 const workInfoSchema = {
