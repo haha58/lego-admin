@@ -1,9 +1,9 @@
 // 解密
 const { jwtVerify } = require('../utils/jwt')
 // 执行失败的数据模型
-const { ErrorRes } = require('../models/BaseModel')
+const { ErrorRes } = require('../middlewares/genValidator')
 // 错误信息集合
-const { loginCheckFailInfo } = require('../config/failInfo')
+const { loginCheckFailInfo } = require('../res-model/failInfo/')
 
 /**
  * 登录校验

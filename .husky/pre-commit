@@ -4,3 +4,4 @@
 
 npm run lint-fix
 npm run test:local
+npx lint-staged --allow-empty

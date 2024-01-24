@@ -9,7 +9,7 @@ module.exports = {
   jsxBracketSameLine: false,
   // 行宽
   printWidth: 100,
-  // 换行方式
+  // 换行方式d:\项目\admin-server-open-master\biz-editor-server-open\commitlint.config.js
   proseWrap: 'preserve',
   // 分号
   semi: false,

@@ -17,6 +17,7 @@ mongoose.connect(`${url}/${database}?authSource=admin`)
 // 连接对象
 const db = mongoose.connection
 
+
 db.on('error', err => {
   console.error('mongoose connect error', err)
 })

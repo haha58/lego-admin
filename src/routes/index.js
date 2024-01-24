@@ -3,7 +3,7 @@ const router = require('koa-router')()
 const packageInfo = require('../../package.json')
 const testMysqlConn = require('../db/mysql2')
 const ENV = require('../utils/env')
-const  WorkModel  = require('../models/WorksModel')
+const  {WorkContentModel}  = require('../models/WorkContentModel')
 const { cacheGet, cacheSet } = require('../utils/cache/index')
 
 // 测试数据库连接
@@ -15,7 +15,7 @@ router.get('/api/db-check', async (ctx) => {
   let mongodbConn
   try {
     mongodbConn = true
-    let res= await WorkModel.findOne()
+    let res= await WorkContentModel.findOne()
     console.log("🚀🚀 ~ rows",res)
   } catch (error) {
     console.log("mongodbConn error",error)
