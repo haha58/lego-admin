@@ -1,4 +1,4 @@
-const redisClient = require('../../db/redis')
+const redisClient = require('../db/redis')
 
 /**
  * redis set

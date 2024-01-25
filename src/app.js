@@ -9,7 +9,7 @@ const helmet = require('koa-helmet')
 const jwt = require('./middlewares/jwt')
 
 const index = require('./routes/index')
-
+const users = require('./routes/users')
 // 安装预防，设置必要的 http 头
 app.use(helmet())
 app.use(jwt)
@@ -25,7 +25,7 @@ app.use(
 app.use(json())
 app.use(logger())
 app.use(index.routes(), index.allowedMethods())
-
+app.use(users.routes(), users.allowedMethods())
 // logger
 app.use(async (ctx, next) => {
     const start = new Date()

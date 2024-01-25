@@ -4,10 +4,10 @@ const packageInfo = require('../../package.json')
 const testMysqlConn = require('../db/mysql2')
 const ENV = require('../utils/env')
 const  {WorkContentModel}  = require('../models/WorkContentModel')
-const { cacheGet, cacheSet } = require('../utils/cache/index')
-
+const { cacheGet, cacheSet } = require('../cache/index')
+router.prefix('/api')
 // 测试数据库连接
-router.get('/api/db-check', async (ctx) => {
+router.get('/db-check', async (ctx) => {
   // // 测试 mysql 数据库连接
   const mysqlRes = await testMysqlConn()
 
