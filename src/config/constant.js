@@ -1,4 +1,7 @@
 module.exports = {
+  // 密码加密 秘钥
+  PASSWORD_SECRET: '123456',
+  
   // jwt 秘钥
   JWT_SECRET: 'admin_for-json#web$token',
 

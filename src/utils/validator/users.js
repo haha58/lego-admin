@@ -19,7 +19,7 @@ const phoneNumberSchema = {
 // 手机号 + 短信验证码 schema
 const phoneNumberVeriCodeSchema = {
     type: 'object',
-    required: ['phoneNumber', 'veriCode'],
+    required: ['phoneNumber', 'veriCode'],  //必填
     properties: {
         phoneNumber: phoneNumberRule,
         veriCode: {
