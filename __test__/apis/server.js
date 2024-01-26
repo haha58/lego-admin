@@ -26,7 +26,7 @@ async function ajax(method = 'get', url = '', bodyOrParams = {}, headers = {}) {
   // headers 加 token
   if (headers.Authorization == null) {
     Object.assign(headers, {
-      Authorization: `Bearer ${TOKEN}`,
+      Authorization: TOKEN,
     })
   }
 

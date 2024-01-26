@@ -1,4 +1,4 @@
-const { setToken, get, post, patch } = require('./_server')
+const { setToken, get, post, patch } = require('./server')
 
 const R = Math.random().toString().slice(-4)
 const PHONE_NUMBER = `1550000${R}` // 每次账号不一样，走用户创建流程
@@ -39,6 +39,7 @@ test('手机验证码登录', async () => {
 test('获取用户信息', async () => {
     const url = '/api/users/getUserInfo'
     const { data, errno } = await get(url)
+    console.log("data",data,errno)
     expect(errno).toBe(0)
     expect(data.phoneNumber).toBe(PHONE_NUMBER)
 })
@@ -47,7 +48,7 @@ test('修改用户信息', async () => {
     const r = Math.random().toString().slice(-4)
     const url = '/api/users/updateUserInfo'
     const { data, errno } = await patch(url, {
-        nickName: `双越${r}`, // 加一个随机数，能看出修改的差异
+        nickName: `默认用户${r}`, // 加一个随机数，能看出修改的差异
         gender: 0,
     })
     expect(errno).toBe(0)
