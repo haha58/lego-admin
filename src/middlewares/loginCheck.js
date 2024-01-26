@@ -1,7 +1,7 @@
 // 解密
 const { jwtVerify } = require('../utils/jwt')
 // 执行失败的数据模型
-const { ErrorRes } = require('../middlewares/genValidator')
+const { ErrorRes } = require('../res-model/index')
 // 错误信息集合
 const { loginCheckFailInfo } = require('../res-model/failInfo')
 

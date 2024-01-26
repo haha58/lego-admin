@@ -65,7 +65,7 @@ async function loginByPhoneNumber(phoneNumber, veriCode) {
         })
         // 创建成功
         return new SuccessRes({
-            token: jwtSign(newUser),
+            token:'Bearer '+ jwtSign(newUser),
         })
     } catch (ex) {
         console.error('创建用户失败', ex)

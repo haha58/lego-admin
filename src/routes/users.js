@@ -2,7 +2,8 @@ const router = require('koa-router')()
 const genValidator = require('../middlewares/genValidator')
 const {phoneNumberSchema,phoneNumberVeriCodeSchema} = require('../utils/validator/users')
 const {sendVeriCode,loginByPhoneNumber} = require('../controller/users/index')
-
+const loginCheck = require('../middlewares/loginCheck')
+const { SuccessRes } = require('../res-model/index')
 // 路由前缀
 router.prefix('/api/users')
 
@@ -21,6 +22,12 @@ router.post('/loginByPhoneNumber', genValidator(phoneNumberVeriCodeSchema), asyn
     const { phoneNumber, veriCode } = ctx.request.body
     const res = await loginByPhoneNumber(phoneNumber, veriCode)
     ctx.body = res
+})
+
+// 获取用户信息
+router.get('/getUserInfo', loginCheck, async ctx => {
+    // 经过了 loginCheck ，用户信息在 ctx.userInfo 中
+    ctx.body = new SuccessRes(ctx.userInfo)
 })
 
 module.exports = router

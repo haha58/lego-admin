@@ -10,7 +10,7 @@ const verify = util.promisify(jwt.verify)
  * @param {string} token token
  */
 async function jwtVerify(token) {
-    const data = await verify(token.split(' ')[1], JWT_SECRET) // 去掉前面的 Bearer
+    const data = await verify(token.split('Bearer ')[1], JWT_SECRET) // 去掉前面的 Bearer
     return data
 }
 
