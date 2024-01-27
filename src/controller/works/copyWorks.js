@@ -1,4 +1,4 @@
-const { findOneWorkService, updateWorkService } = require('../../server/works')
+const { findOneWorkService, updateWorkService } = require('../../service/works')
 const { ErrorRes } = require('../../res-model/index')
 const { forceOffLineFailInfo } = require('../../res-model/failInfo/index')
 const createWorks = require('./createWorks')

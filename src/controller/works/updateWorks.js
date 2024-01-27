@@ -1,5 +1,5 @@
 const _ = require('lodash')
-const { updateWorkService } = require('../../server/works')
+const { updateWorkService } = require('../../service/works')
 const { ErrorRes, SuccessRes } = require('../../res-model/index')
 const {
     updateWorkFailInfo,

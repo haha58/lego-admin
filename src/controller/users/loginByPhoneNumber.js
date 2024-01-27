@@ -9,7 +9,7 @@ const {
     findOneUserService,
     createUserService,
     updateUserInfoService,
-} = require('../../server/users')
+} = require('../../service/users')
 const doCrypto = require('../../utils/cryp')
 const genPassword = require('../../utils/genPassword')
 const { jwtSign } = require('../../utils/jwt')

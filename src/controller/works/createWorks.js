@@ -2,7 +2,7 @@
 const { v4: uuidV4 } = require('uuid')
 const { ErrorRes, SuccessRes } = require('../../res-model/index')
 const {createWorksFailInfo,createWorksDbErrorFailInfo} = require('../../res-model/failInfo')
-const { createWorkService} = require('../../server/works')
+const { createWorkService} = require('../../service/works')
 /**
  * 创建作品
  * @param {string} author 作者 username

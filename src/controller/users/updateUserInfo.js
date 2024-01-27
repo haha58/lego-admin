@@ -1,4 +1,4 @@
-const { updateUserInfoService } = require('../../server/users')
+const { updateUserInfoService } = require('../../service/users')
 const {
     updateUserInfoFailInfo,
     updateUserInfoDbErrorFailInfo,
