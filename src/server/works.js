@@ -66,8 +66,57 @@ async function findOneWorkService(whereOpt = {}) {
     }
 }
 
+/**
+ * 更新作品数据
+ * @param {object} data 要更新的数据
+ * @param {object} whereOpt 查询提交件
+ * @returns {boolean} true/false
+ */
+async function updateWorkService(data = {}, whereOpt = {}) {
+    // 保证数据不为空
+    if (_.isEmpty(data)) return false
+    if (_.isEmpty(whereOpt)) return false
+
+    // 判断要更新的数据，是否存在
+    const work = await findOneWorkService(whereOpt)
+    if (work == null) return false
+
+    // 要更新的数据
+    const updateData = data
+
+    // 更新 content - mongodb
+    const { content } = updateData
+    if (content) {
+        // 更新 content
+        const { contentId } = work
+        await WorkContentModel.findByIdAndUpdate(contentId, {
+            // 属性符合 ContentModel 规定
+            components: content.components || [],
+            props: content.props || {},
+            setting: content.setting || {},
+        })
+    }
+
+    // 删除不需要更新的数据
+    delete updateData.id
+    delete updateData.uuid
+    delete updateData.content
+    delete updateData.contentId
+
+    if (_.isEmpty(updateData)) {
+        // 至此，更新数据为空。
+        // 这也可能正常，例如用户只更新 content ，content 是存储到 mongodb 的，不会更新 mysql
+        return true
+    }
+
+    // 更新作品数据 - mysql
+    const result = await WorksModel.update(updateData, { where: whereOpt })
+
+    return result[0] !== 0
+}
 
 module.exports = {
     createWorkService,
-    findOneWorkService
+    findOneWorkService,
+    updateWorkService
 }
