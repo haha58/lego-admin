@@ -1,2 +1,3 @@
 require('./db-check')
-require('./users')/*  */
+require('./users')/* 用户信息 */
+require('./works')/* 作品信息 */ // require是同步执行
