@@ -1,8 +1,8 @@
 const router = require('koa-router')()
 const genValidator = require('../middlewares/genValidator')
 const loginCheck = require('../middlewares/loginCheck')
-const {workInfoSchema} =require('../utils/validator/works')
-const {createWorks} =require('../controller/works')
+const { workInfoSchema } = require('../utils/validator/works')
+const { createWorks, findOneWork } = require('../controller/works')
 // 路由前缀
 router.prefix('/api/works')
 
@@ -13,6 +13,15 @@ router.post('/', loginCheck, genValidator(workInfoSchema), async ctx => {
     const { title, desc, content = {} } = ctx.request.body
 
     const res = await createWorks(username, { title, desc }, content)
+    ctx.body = res
+})
+
+// 查询单个作品
+router.get('/:id', loginCheck, async ctx => {
+    const { id } = ctx.params
+    const { username } = ctx.userInfo
+
+    const res = await findOneWork(id, username)
     ctx.body = res
 })
 
