@@ -88,4 +88,12 @@ router.post('/publish/:id', loginCheck, async ctx => {
     ctx.body = res
 })
 
+// 发布为模板
+router.post('/publish-template/:id', loginCheck, async ctx => {
+    const { id } = ctx.params
+    const { username } = ctx.userInfo
+    const res = await publishWork(id, username, 1)
+    ctx.body = res
+})
+
 module.exports = router
