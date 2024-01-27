@@ -10,6 +10,7 @@ const jwt = require('./middlewares/jwt')
 
 const index = require('./routes/index')
 const users = require('./routes/users')
+const works = require('./routes/works')
 // 安装预防，设置必要的 http 头
 app.use(helmet())
 app.use(jwt)
@@ -26,6 +27,8 @@ app.use(json())
 app.use(logger())
 app.use(index.routes(), index.allowedMethods())
 app.use(users.routes(), users.allowedMethods())
+app.use(works.routes(), works.allowedMethods())
+
 // logger
 app.use(async (ctx, next) => {
     const start = new Date()
