@@ -2,7 +2,7 @@ const router = require('koa-router')()
 const genValidator = require('../middlewares/genValidator')
 const loginCheck = require('../middlewares/loginCheck')
 const { workInfoSchema } = require('../utils/validator/works')
-const { createWorks, findOneWork, updateWorks,copyWorks,deleteWork } = require('../controller/works')
+const { createWorks, findOneWork, updateWorks, copyWorks, deleteWork, putBackWork } = require('../controller/works')
 // 路由前缀
 router.prefix('/api/works')
 
@@ -51,5 +51,15 @@ router.delete('/:id', loginCheck, async ctx => {
     const res = await deleteWork(id, username)
     ctx.body = res
 })
+
+// 恢复删除
+router.post('/put-back/:id', loginCheck, async ctx => {
+    const { id } = ctx.params
+    const { username } = ctx.userInfo
+
+    const res = await putBackWork(id, username)
+    ctx.body = res
+})
+
 
 module.exports = router
