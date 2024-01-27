@@ -22,7 +22,7 @@ async function findMyWorks(author, queryInfo = {}, pageInfo = {}) {
             title,
             status,
             author,
-            isTemplate: isTemplate === '1',
+            isTemplate,
         },
         {
             pageIndex,

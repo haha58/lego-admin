@@ -136,7 +136,7 @@ async function findWorkListService(whereOpt = {}, pageOpt = {}) {
     delete whereOpt.title // eslint-disable-line
     if (isTemplate != null) {
         Object.assign(wheres, {
-            isTemplate: !!isTemplate, // 转换为 boolean 类型
+            isTemplate,
         })
         delete whereOpt.isTemplate // eslint-disable-line
     }

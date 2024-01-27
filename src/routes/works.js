@@ -73,7 +73,7 @@ router.post('/transfer/:id/:receiver', loginCheck, async ctx => {
 // 获取自己的作品或模板
 router.get('/', loginCheck, async ctx => {
     const { username } = ctx.userInfo
-    const { title, status, isTemplate = '0', pageIndex, pageSize } = ctx.query
+    const { title, status, isTemplate = 0, pageIndex, pageSize } = ctx.query
     const res = await findMyWorks(username, { title, status, isTemplate }, { pageIndex, pageSize })
     ctx.body = res
 })
