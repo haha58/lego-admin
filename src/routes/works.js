@@ -2,7 +2,7 @@ const router = require('koa-router')()
 const genValidator = require('../middlewares/genValidator')
 const loginCheck = require('../middlewares/loginCheck')
 const { workInfoSchema } = require('../utils/validator/works')
-const { createWorks, findOneWork, updateWorks } = require('../controller/works')
+const { createWorks, findOneWork, updateWorks,copyWorks } = require('../controller/works')
 // 路由前缀
 router.prefix('/api/works')
 
@@ -31,6 +31,15 @@ router.patch('/:id', loginCheck, async ctx => {
     const { username } = ctx.userInfo
 
     const res = await updateWorks(id, username, ctx.request.body)
+    ctx.body = res
+})
+
+// 复制作品（通过模板创建作品，也是复制）
+router.post('/copy/:id', loginCheck, async ctx => {
+    const { id } = ctx.params
+    const { username } = ctx.userInfo
+
+    const res = await copyWorks(id, username)
     ctx.body = res
 })
 
