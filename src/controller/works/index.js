@@ -5,6 +5,7 @@ const copyWorks = require('./copyWorks')
 const deleteWork = require('./deleteWork')
 const putBackWork = require('./putBackWork')
 const transferWorks = require('./transferWorks')
+const findMyWorks = require('./findMyWorks')
 
 module.exports = {
   createWorks,
@@ -13,5 +14,6 @@ module.exports = {
   copyWorks,
   deleteWork,
   putBackWork,
-  transferWorks
+  transferWorks,
+  findMyWorks
 }

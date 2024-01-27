@@ -2,7 +2,7 @@ const router = require('koa-router')()
 const genValidator = require('../middlewares/genValidator')
 const loginCheck = require('../middlewares/loginCheck')
 const { workInfoSchema } = require('../utils/validator/works')
-const { createWorks, findOneWork, updateWorks, copyWorks, deleteWork, putBackWork,transferWorks } = require('../controller/works')
+const { createWorks, findOneWork, updateWorks, copyWorks, deleteWork, putBackWork,transferWorks,findMyWorks } = require('../controller/works')
 // 路由前缀
 router.prefix('/api/works')
 
@@ -67,6 +67,14 @@ router.post('/transfer/:id/:receiver', loginCheck, async ctx => {
     const { username } = ctx.userInfo
 
     const res = await transferWorks(id, username, receiver)
+    ctx.body = res
+})
+
+// 获取自己的作品或模板
+router.get('/', loginCheck, async ctx => {
+    const { username } = ctx.userInfo
+    const { title, status, isTemplate = '0', pageIndex, pageSize } = ctx.query
+    const res = await findMyWorks(username, { title, status, isTemplate }, { pageIndex, pageSize })
     ctx.body = res
 })
 

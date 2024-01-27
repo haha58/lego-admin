@@ -115,8 +115,87 @@ async function updateWorkService(data = {}, whereOpt = {}) {
     return result[0] !== 0
 }
 
+/**
+ * 查询 作品/模板 列表
+ * @param {object} whereOpt 查询条件
+ * @param {object} pageOpt 分页
+ */
+async function findWorkListService(whereOpt = {}, pageOpt = {}) {
+    // ------------ 拼接查询条件 ------------
+    const wheres = {}
+
+    // 1. 处理特殊的查询条件
+    const { title, isTemplate, status } = whereOpt
+    if (title) {
+        Object.assign(wheres, {
+            title: {
+                [Op.like]: `%${title}%`, // 模糊查询
+            },
+        })
+    }
+    delete whereOpt.title // eslint-disable-line
+    if (isTemplate != null) {
+        Object.assign(wheres, {
+            isTemplate: !!isTemplate, // 转换为 boolean 类型
+        })
+        delete whereOpt.isTemplate // eslint-disable-line
+    }
+    const statusNum = parseInt(status, 10)
+    // eslint-disable-next-line
+    if (isNaN(statusNum)) {
+        // status 无要求，则屏蔽掉删除的
+        Object.assign(wheres, {
+            status: {
+                //models.Sequelize.Op 是 Sequelize 中用于构建查询操作的操作符对象。
+                //models.Sequelize.Op.ne表示 "不等于" 的比较
+                [Op.ne]: 0,
+            },
+        })
+    } else {
+        // status 有明确要求
+        Object.assign(wheres, { status: statusNum })
+    }
+    delete whereOpt.status // eslint-disable-line
+
+    // 2. 拼接其他查询条件
+    _.forEach(whereOpt, (val, key) => {
+        if (val == null) return
+        wheres[key] = val
+    })
+
+    // ------------ 执行查询 ------------
+    const { pageSize, pageIndex } = pageOpt
+    const pageSizeNumber = parseInt(pageSize, 10) // 有可能传入进来是 string 类型的
+    const pageIndexNumber = parseInt(pageIndex, 10)
+    const result = await WorksModel.findAndCountAll({
+        limit: pageSizeNumber, // 每页多少条
+        offset: pageSizeNumber * pageIndexNumber, // 跳过多少条
+        order: [
+            ['orderIndex', 'desc'], // 倒序
+            ['id', 'desc'], // 倒序。多个排序，按先后顺序确定优先级
+        ],
+        where: wheres,
+        include: [
+            // 关联 User
+            {
+                model: UserModel,
+                attributes: ['userName', 'nickName', 'gender', 'picture'],
+            },
+        ],
+    })
+    // result.count 总数，忽略了 limit 和 offset
+    // result.rows 查询结果，数组
+    const list = result.rows.map(row => row.dataValues)
+
+    return {
+        count: result.count,
+        list,
+    }
+}
+
 module.exports = {
     createWorkService,
     findOneWorkService,
-    updateWorkService
+    updateWorkService,
+    findWorkListService
 }
