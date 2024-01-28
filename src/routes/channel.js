@@ -6,7 +6,7 @@ const genValidator = require('../middlewares/genValidator')
 const channelSchema = require('../utils/validator/channel')
 
 // controller
-const { createChannel,updateChannelName,getWorkChannels } = require('../controller/channel/index')
+const { createChannel,updateChannelName,getWorkChannels,deleteChannel } = require('../controller/channel/index')
 
 // 路由前缀
 router.prefix('/api/channel')
@@ -29,6 +29,13 @@ router.patch('/updateName/:id', loginCheck, genValidator(channelSchema), async c
 router.get('/getWorkChannels/:workId', loginCheck, async ctx => {
     const { workId } = ctx.params
     const res = await getWorkChannels(workId)
+    ctx.body = res
+})
+
+// 删除渠道
+router.delete('/:id', loginCheck, async ctx => {
+    const { id } = ctx.params
+    const res = await deleteChannel(id)
     ctx.body = res
 })
 
