@@ -6,7 +6,7 @@ const genValidator = require('../middlewares/genValidator')
 const channelSchema = require('../utils/validator/channel')
 
 // controller
-const { createChannel,updateChannelName } = require('../controller/channel/index')
+const { createChannel,updateChannelName,getWorkChannels } = require('../controller/channel/index')
 
 // 路由前缀
 router.prefix('/api/channel')
@@ -22,6 +22,13 @@ router.patch('/updateName/:id', loginCheck, genValidator(channelSchema), async c
     const { id } = ctx.params
     const { name } = ctx.request.body
     const res = await updateChannelName(id, name)
+    ctx.body = res
+})
+
+// 根据一个作品的所有渠道
+router.get('/getWorkChannels/:workId', loginCheck, async ctx => {
+    const { workId } = ctx.params
+    const res = await getWorkChannels(workId)
     ctx.body = res
 })
 

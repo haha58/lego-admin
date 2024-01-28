@@ -1,5 +1,6 @@
 const ChannelModel = require('../models/ChannelModel')
 const _ = require('lodash')
+const { Op } = require('sequelize')
 
 /**
  * 创建渠道
@@ -24,7 +25,40 @@ async function updateChannelService(data = {}, whereOpt = {}) {
     return result[0] !== 0
 }
 
+/**
+ * 查询渠道
+ * @param {object} whereOpt 查询条件
+ */
+async function findChannelsService(whereOpt = {}) {
+    // 屏蔽掉删除的
+    if (whereOpt.status == null) {
+        Object.assign(whereOpt, {
+            status: {
+                [Op.ne]: 0,
+            },
+        })
+    }
+
+    const result = await ChannelModel.findAndCountAll({
+        order: [
+            ['id', 'desc'], // 倒序
+        ],
+        where: whereOpt,
+    })
+
+    // result.count 总数，忽略了 limit 和 offset
+    // result.rows 查询结果，数组
+    const list = result.rows.map(row => row.dataValues)
+
+    return {
+        count: result.count,
+        list,
+    }
+}
+
+
 module.exports = {
     createChannelService,
-    updateChannelService
+    updateChannelService,
+    findChannelsService
 }
