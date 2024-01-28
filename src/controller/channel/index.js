@@ -1,5 +1,7 @@
 const createChannel = require('./createChannel')
+const updateChannelName = require('./updateChannelName')
 
 module.exports = {
-  createChannel
+  createChannel,
+  updateChannelName
 }
