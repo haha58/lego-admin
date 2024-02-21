@@ -25,4 +25,14 @@ module.exports = {
   msgVeriCodeTimeout: 2 * 60/*  */,
   // 发布出来的 h5 域名
   h5Origin: 'http://localhost:3001',
+  // 配置 COS 实例
+  OSSConfig:{
+    SecretId: 'AKID18GIF4nLvTuENrDTm8MSROFzXr337LOK',
+    SecretKey: 'oUxNbdwACFD4mNn4FMPN7dz83kFPhBav',
+  },
+  BucketConfig:{
+    Bucket:'imooc-dev-1323650952',
+    Region:'ap-shanghai'
+  },
+  OSS_CDNHost:''
 }

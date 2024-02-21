@@ -13,6 +13,7 @@ const users = require('./routes/users')
 const works = require('./routes/works')
 const templates = require('./routes/templates')
 const channel = require('./routes/channel')
+const utils = require('./routes/utils')
 // 安装预防，设置必要的 http 头
 app.use(helmet())
 app.use(jwt)
@@ -25,6 +26,7 @@ app.use(
         enableTypes: ['json', 'form', 'text'],
     })
 )
+
 app.use(json())
 app.use(logger())
 app.use(index.routes(), index.allowedMethods())
@@ -32,6 +34,7 @@ app.use(users.routes(), users.allowedMethods())
 app.use(works.routes(), works.allowedMethods())
 app.use(templates.routes(), works.allowedMethods())
 app.use(channel.routes(), channel.allowedMethods())
+app.use(utils.routes(), utils.allowedMethods())
 
 // logger
 app.use(async (ctx, next) => {
